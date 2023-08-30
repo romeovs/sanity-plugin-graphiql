@@ -48,6 +48,7 @@
     "watch": "pkg-utils watch --strict"
   },
   "dependencies": {
+    "@graphiql/toolkit": "^0.9.1",
     "@sanity/icons": "^2.4.1",
     "@sanity/incompatible-plugin": "^1.0.4"
   },
