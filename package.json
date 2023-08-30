@@ -51,7 +51,8 @@
     "@graphiql/react": "^0.19.3",
     "@graphiql/toolkit": "^0.9.1",
     "@sanity/icons": "^2.4.1",
-    "@sanity/incompatible-plugin": "^1.0.4"
+    "@sanity/incompatible-plugin": "^1.0.4",
+    "graphiql": "^3.0.5"
   },
   "devDependencies": {
     "@sanity/pkg-utils": "^2.4.8",
