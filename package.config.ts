@@ -1,4 +1,5 @@
 import {defineConfig} from '@sanity/pkg-utils'
+import styles from 'rollup-plugin-styles'
 
 export default defineConfig({
   legacyExports: true,
@@ -13,5 +14,13 @@ export default defineConfig({
       'ae-internal-missing-underscore': 'off',
       'ae-missing-release-tag': 'off',
     },
+  },
+  rollup: {
+    plugins: [
+      // @ts-expect-error: TODO - why does this not work?
+      styles({
+        mode: 'inject',
+      }),
+    ],
   },
 })
