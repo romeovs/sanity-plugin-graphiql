@@ -1,0 +1,28 @@
+.graphiql-container,
+.CodeMirror-info,
+.CodeMirror-lint-tooltip,
+.graphiql-dialog,
+.graphiql-dialog-overlay,
+.graphiql-tooltip,
+[data-radix-popper-content-wrapper] {
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    'Liberation Sans', Helvetica, Arial, system-ui, sans-serif !important;
+
+  --font-family-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
+    'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono',
+    'Courier New', monospace !important;
+
+  *:focus,
+  *:focus-visible {
+    outline: none !important;
+  }
+}
+
+.custom-icon {
+  height: 2rem;
+  width: 2rem;
+
+  path {
+    stroke: hsla(var(--color-neutral), var(--alpha-tertiary));
+  }
+}

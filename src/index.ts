@@ -1,8 +1,9 @@
+import {lazy} from 'react'
 import {definePlugin} from 'sanity'
+import {BlockElementIcon} from '@sanity/icons'
+import {GraphiQLToolConfig} from './types'
 
-interface MyPluginConfig {
-  /* nothing here yet */
-}
+const GraphiQLTool = lazy(() => import('./component'))
 
 /**
  * Usage in `sanity.config.ts` (or .js)
@@ -17,10 +18,18 @@ interface MyPluginConfig {
  * })
  * ```
  */
-export const myPlugin = definePlugin<MyPluginConfig | void>((config = {}) => {
-  // eslint-disable-next-line no-console
-  console.log('hello from sanity-plugin-graphiql')
+export const myPlugin = definePlugin<GraphiQLToolConfig>(function (config) {
   return {
     name: 'sanity-plugin-graphiql',
+    title: 'GraphiQL',
+    tools: [
+      {
+        name: 'graphiql',
+        title: 'GraphQL',
+        icon: BlockElementIcon,
+        component: GraphiQLTool,
+        options: config,
+      },
+    ],
   }
 })
