@@ -45,7 +45,8 @@
     "link-watch": "plugin-kit link-watch",
     "lint": "eslint .",
     "prepublishOnly": "run-s build",
-    "watch": "pkg-utils watch --strict"
+    "watch": "pkg-utils watch --strict",
+    "test": "true"
   },
   "dependencies": {
     "@graphiql/react": "^0.19.3",
