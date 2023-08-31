@@ -31,7 +31,7 @@ export const graphiql = definePlugin<GraphiQLToolConfig>(function (config) {
     tools: [
       {
         name: 'graphiql',
-        title: 'GraphQL',
+        title: 'GraphiQL',
         icon: BlockElementIcon,
         component: GraphiQLTool,
         options: config,
