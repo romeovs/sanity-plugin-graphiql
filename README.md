@@ -18,12 +18,12 @@ Add it as a plugin in `sanity.config.ts` (or .js):
 
 ```ts
 import {defineConfig} from 'sanity'
-import {graphiql} from 'sanity-plugin-graphiql'
+import {graphiQLTool} from 'sanity-plugin-graphiql'
 
 export default defineConfig({
   //...
   plugins: [
-    graphiql({
+    graphiQLTool({
       version: 'v2023-08-01',
       dataset: 'production',
       tag: 'default',
