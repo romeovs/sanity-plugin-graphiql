@@ -4,6 +4,8 @@
 
 Add GraphiQL to your Sanity Studio.
 
+![Screenshot](./screenshots/screen.png)
+
 ## Installation
 
 ```sh
