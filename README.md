@@ -32,6 +32,14 @@ export default defineConfig({
 })
 ```
 
+### Options
+
+The following options are required to set up the tool:
+
+- `version`: the version of the GraphQL API you are running against,
+- `dataset`: the dataset you want to run queries against,
+- `tag`: the GraphQL api tag, as defined in `sanity.cli.ts`
+
 ## License
 
 [MIT](LICENSE) © Romeo Van Snick
