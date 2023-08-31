@@ -14,11 +14,17 @@ Add it as a plugin in `sanity.config.ts` (or .js):
 
 ```ts
 import {defineConfig} from 'sanity'
-import {myPlugin} from 'sanity-plugin-graphiql'
+import {graphiql} from 'sanity-plugin-graphiql'
 
 export default defineConfig({
   //...
-  plugins: [myPlugin({})],
+  plugins: [
+    graphiql({
+      version: 'v2023-08-01',
+      dataset: 'production',
+      tag: 'default',
+    }),
+  ],
 })
 ```
 
@@ -33,7 +39,6 @@ with default configuration for build & watch scripts.
 
 See [Testing a plugin in Sanity Studio](https://github.com/sanity-io/plugin-kit#testing-a-plugin-in-sanity-studio)
 on how to run this plugin with hotreload in the studio.
-
 
 ### Release new version
 

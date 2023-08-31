@@ -10,15 +10,21 @@ const GraphiQLTool = lazy(() => import('./component'))
  *
  * ```ts
  * import {defineConfig} from 'sanity'
- * import {myPlugin} from 'sanity-plugin-graphiql'
+ * import {graphiql} from 'sanity-plugin-graphiql'
  *
  * export default defineConfig({
  *   // ...
- *   plugins: [myPlugin()],
+ *   plugins: [
+ *    graphiql({
+ *      version: 'v2023-08-01',
+ *      dataset: 'production',
+ *      tag: 'default',
+ *    }),
+ *  ],
  * })
  * ```
  */
-export const myPlugin = definePlugin<GraphiQLToolConfig>(function (config) {
+export const graphiql = definePlugin<GraphiQLToolConfig>(function (config) {
   return {
     name: 'sanity-plugin-graphiql',
     title: 'GraphiQL',
