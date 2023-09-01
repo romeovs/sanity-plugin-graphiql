@@ -8,11 +8,21 @@ type Props = {
 export function ErrorRender(props: Props) {
   const {error} = props
 
+  return <ErrorMessage message='An error occured in the GraphiQL tool.' error={error} />
+}
+
+type ErrorMessageProps = {
+  message: string
+  error?: Error
+}
+
+function ErrorMessage(props: ErrorMessageProps) {
+  const {message, error} = props
   return (
     <Flex align='center' direction='column' gap={3} height='fill' justify='center'>
       <Stack>
         <Card radius={1} padding={4} shadow={1} tone='critical'>
-          <Text muted>Failed to fetch available GraphQL API's for this workspace.</Text>
+          <Text muted>{message}</Text>
           {error?.message && (
             <>
               <br />
