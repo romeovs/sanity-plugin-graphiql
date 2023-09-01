@@ -3,12 +3,12 @@ import {createGraphiQLFetcher} from '@graphiql/toolkit'
 
 import {useToken} from './use-token'
 
-export function useFetcher(url: string) {
+export function useFetcher(url: string | null) {
   const token = useToken()
 
   return React.useMemo(
     function () {
-      if (!token) {
+      if (!token || !url) {
         return null
       }
 
