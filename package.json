@@ -53,6 +53,7 @@
     "@graphiql/toolkit": "^0.9.1",
     "@sanity/icons": "^2.4.1",
     "@sanity/incompatible-plugin": "^1.0.4",
+    "@sanity/ui": "^1.8.2",
     "graphiql": "^3.0.5"
   },
   "devDependencies": {
