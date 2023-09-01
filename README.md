@@ -38,7 +38,8 @@ export default defineConfig({
 
 The following options are required to set up the tool:
 
-- `apiVersion`: the version of the sanity API used for fetching GraphQL metadata
+- `apiVersion` **required**: the version of the sanity API used for fetching GraphQL metadata
+- `url`: set a custom GraphQL api. This removes the ability to select the url from the tool.
 
 ## License
 
