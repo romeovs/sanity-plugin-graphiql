@@ -1,9 +1,7 @@
 import * as React from 'react'
 
-import {Tool, useProjectId} from 'sanity'
-import {EyeOpenIcon, EyeClosedIcon} from '@sanity/icons'
+import {Tool} from 'sanity'
 
-import {ToolbarButton} from '@graphiql/react'
 import {GraphiQL} from 'graphiql'
 
 import 'graphiql/graphiql.css'
@@ -12,19 +10,18 @@ import './custom.css'
 import {GraphiQLToolConfig} from './types'
 import {useFetcher} from './use-fetcher'
 import {useTimedFetcher} from './use-timed'
+import {Header} from './header'
+import {useListGraphQLApis} from './use-list-graphql-apis'
 
 type GraphiQLToolProps = {
   tool: Tool<GraphiQLToolConfig>
 }
 
 export default function GraphiQLTool(props: GraphiQLToolProps) {
-  const {version, dataset, tag} = props.tool.options!
+  const {version} = props.tool.options!
 
-  const projectId = useProjectId()
-  const [preview, setPreview] = React.useState(false)
-
-  const perspective = preview ? 'previewDrafts' : 'published'
-  const url = `https://${projectId}.api.sanity.io/${version}/graphql/${dataset}/${tag}?perspective=${perspective}`
+  const apis = useListGraphQLApis(version)
+  const [url, setUrl] = React.useState<string | null>(null)
 
   const _fetcher = useFetcher(url)
   const [fetcher, elapsed] = useTimedFetcher(_fetcher)
@@ -33,35 +30,16 @@ export default function GraphiQLTool(props: GraphiQLToolProps) {
     return null
   }
 
-  function togglePreview() {
-    setPreview((value) => !value)
-  }
-
   return (
-    <GraphiQL
-      key={preview.toString()}
-      fetcher={fetcher}
-      defaultQuery={''}
-      toolbar={{
-        additionalContent: [
-          <ToolbarButton
-            label={preview ? 'Disable preview mode' : 'Enable preview mode'}
-            onClick={togglePreview}
-          >
-            {preview ? (
-              <EyeOpenIcon className='custom-icon' />
-            ) : (
-              <EyeClosedIcon className='custom-icon' />
-            )}
-          </ToolbarButton>,
-        ],
-      }}
-    >
-      <GraphiQL.Footer>
-        <div className='graphiql-footer-elapsed'>
-          End-to-end: ${elapsed ? `${elapsed}ms` : 'n/a'}
-        </div>
-      </GraphiQL.Footer>
-    </GraphiQL>
+    <div className='graphiql-tool-wrapper'>
+      <Header url={url} onUrlChange={setUrl} apis={apis} />
+      <GraphiQL fetcher={fetcher} defaultQuery={''}>
+        <GraphiQL.Footer>
+          <div className='graphiql-footer-elapsed'>
+            End-to-end: ${elapsed ? `${elapsed}ms` : 'n/a'}
+          </div>
+        </GraphiQL.Footer>
+      </GraphiQL>
+    </div>
   )
 }

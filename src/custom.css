@@ -30,3 +30,10 @@
 .graphiql-footer-elapsed {
   padding: 16px;
 }
+
+.graphiql-tool-wrapper {
+  display: flex;
+  flex-direction: column;
+  outline: 2px solid red;
+  height: 100%;
+}
