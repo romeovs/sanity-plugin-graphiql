@@ -16,9 +16,7 @@ const GraphiQLTool = lazy(() => import('./component'))
  *   // ...
  *   plugins: [
  *    graphiQLTool({
- *      version: 'v2023-08-01',
- *      dataset: 'production',
- *      tag: 'default',
+ *      apiVersion: '2021-10-21',
  *    }),
  *  ],
  * })

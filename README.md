@@ -24,9 +24,7 @@ export default defineConfig({
   //...
   plugins: [
     graphiQLTool({
-      version: 'v2023-08-01',
-      dataset: 'production',
-      tag: 'default',
+      apiVersion: '2021-10-21',
     }),
   ],
 })
@@ -36,9 +34,7 @@ export default defineConfig({
 
 The following options are required to set up the tool:
 
-- `version`: the version of the GraphQL API you are running against,
-- `dataset`: the dataset you want to run queries against,
-- `tag`: the GraphQL api tag, as defined in `sanity.cli.ts`
+- `apiVersion`: the version of the sanity API used for fetching GraphQL metadata
 
 ## License
 

@@ -15,9 +15,9 @@ type GraphiQLToolProps = {
 }
 
 export default function GraphiQLTool(props: GraphiQLToolProps) {
-  const {version} = props.tool.options!
+  const {apiVersion} = props.tool.options!
 
-  const apis = useListGraphQLApis(version)
+  const apis = useListGraphQLApis(apiVersion)
   const [url, setUrl] = React.useState<string | null>(null)
 
   return (
