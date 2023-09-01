@@ -9,7 +9,7 @@ import {GraphiQLToolConfig} from './types'
 import {useListGraphQLApis} from './use-list-graphql-apis'
 import {Header} from './header'
 import {ErrorBoundary} from './error-boundary'
-import {ErrorRender} from './error'
+import {ErrorRender, ErrorMessage} from './error'
 import {GraphiQL} from './graphiql'
 
 type GraphiQLToolProps = {
@@ -29,6 +29,12 @@ function Render(props: GraphiQLToolProps) {
 
   const apis = useListGraphQLApis(apiVersion)
   const [url, setUrl] = React.useState<string | null>(null)
+
+  if (apis.data?.length === 0) {
+    return (
+      <ErrorMessage message="There are no GraphQL API's defined for this project, please add some before attempting to use this tool." />
+    )
+  }
 
   return (
     <div className='graphiql-tool-wrapper'>

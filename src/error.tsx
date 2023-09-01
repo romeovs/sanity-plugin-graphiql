@@ -16,7 +16,7 @@ type ErrorMessageProps = {
   error?: Error
 }
 
-function ErrorMessage(props: ErrorMessageProps) {
+export function ErrorMessage(props: ErrorMessageProps) {
   const {message, error} = props
   return (
     <Flex align='center' direction='column' gap={3} height='fill' justify='center'>
