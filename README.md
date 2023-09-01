@@ -1,5 +1,8 @@
 # sanity-plugin-graphiql
 
+[![Version](https://img.shields.io/npm/v/sanity-plugin-graphiql)](https://www.npmjs.com/package/sanity-plugin-graphiql)
+[![Licence](https://img.shields.io/npm/l/sanity-plugin-graphiql)](https://www.npmjs.com/package/sanity-plugin-graphiql)
+
 > This is a **Sanity Studio v3** plugin.
 
 Add GraphiQL to your Sanity Studio.
