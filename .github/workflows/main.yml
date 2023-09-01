@@ -34,6 +34,11 @@ jobs:
       - run: pnpm run lint
         if: github.event.inputs.test != 'false'
       - run: pnpm run prepublishOnly
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
 
   test:
     runs-on: ubuntu-latest
@@ -75,12 +80,17 @@ jobs:
           cache: pnpm
           node-version: lts/*
       - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
       - run: pnpm audit signatures
-      - run: pnpm publish
+      - run: pnpm publish --ignore-scripts
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: pnpm publish --publish
+      - run: pnpm publish --dry-run --ignore-scripts
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
