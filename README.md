@@ -25,6 +25,10 @@ export default defineConfig({
   plugins: [
     graphiQLTool({
       apiVersion: '2021-10-21',
+
+      // if you want to use a GraphQL api that is
+      // not a Sanity GraphQL API, you can hardcode the url.
+      url: 'https://www.example.com/api/my/graphql',
     }),
   ],
 })

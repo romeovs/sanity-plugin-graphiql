@@ -25,10 +25,11 @@ export default function GraphiQLTool(props: GraphiQLToolProps) {
 }
 
 function Render(props: GraphiQLToolProps) {
-  const {apiVersion} = props.tool.options!
+  const options = props.tool.options!
+  const {apiVersion} = options
 
   const apis = useListGraphQLApis(apiVersion)
-  const [url, setUrl] = React.useState<string | null>(null)
+  const [url, setUrl] = React.useState<string | null>(options.url ?? null)
 
   if (apis.data?.length === 0) {
     return (
@@ -38,7 +39,7 @@ function Render(props: GraphiQLToolProps) {
 
   return (
     <div className='graphiql-tool-wrapper'>
-      <Header url={url} onUrlChange={setUrl} apis={apis} />
+      {options.url ? null : <Header url={url} onUrlChange={setUrl} apis={apis} />}
       <GraphiQL url={url} />
     </div>
   )
