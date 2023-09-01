@@ -2,6 +2,7 @@
 
 [![Version](https://img.shields.io/npm/v/sanity-plugin-graphiql)](https://www.npmjs.com/package/sanity-plugin-graphiql)
 [![Licence](https://img.shields.io/npm/l/sanity-plugin-graphiql)](https://www.npmjs.com/package/sanity-plugin-graphiql)
+![Sanity Studio](https://img.shields.io/badge/v3-000000?label=sanity%20studio)
 
 > This is a **Sanity Studio v3** plugin.
 
