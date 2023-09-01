@@ -17,6 +17,18 @@ const GraphiQLTool = lazy(() => import('./component'))
  *   plugins: [
  *    graphiQLTool({
  *      apiVersion: '2021-10-21',
+ *
+ *      // use a custom graphql api, disable the api selector in the tool.
+ *      url,
+ *
+ *      // override the default tool name
+ *      name: 'graphiql',
+ *
+ *      // override the default tool title
+ *      title: 'GraphiQL',
+ *
+ *      // override the default tool icon
+ *      icon: BlockElementIcon,
  *    }),
  *  ],
  * })
@@ -28,9 +40,9 @@ export const graphiQLTool = definePlugin<GraphiQLToolConfig>(function (config) {
     title: 'GraphiQL',
     tools: [
       {
-        name: 'graphiql',
-        title: 'GraphiQL',
-        icon: BlockElementIcon,
+        name: config.name ?? 'graphiql',
+        title: config.title ?? 'GraphiQL',
+        icon: config.icon ?? BlockElementIcon,
         component: GraphiQLTool,
         options: config,
       },

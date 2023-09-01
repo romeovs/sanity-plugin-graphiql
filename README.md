@@ -34,6 +34,15 @@ export default defineConfig({
       // if you want to use a GraphQL api that is
       // not a Sanity GraphQL API, you can hardcode the url.
       url: 'https://www.example.com/api/my/graphql',
+
+      // override the default tool name
+      name: 'graphiql',
+
+      // override the default tool title
+      title: 'GraphiQL',
+
+      // override the default tool icon
+      icon: BlockElementIcon,
     }),
   ],
 })
@@ -45,6 +54,9 @@ The following options are required to set up the tool:
 
 - `apiVersion` **required**: the version of the sanity API used for fetching GraphQL metadata
 - `url`: set a custom GraphQL api. This removes the ability to select the url from the tool.
+- `name`: set a custom name for the tool. (default: `graphiql`)
+- `title`: set a custom name for the tool. (default: `GraphiQL`)
+- `icon`: set a custom name for the tool. (default: `"@sanity/icons".BlockElementIcon`)
 
 ## License
 
