@@ -1,6 +1,6 @@
 {
   "name": "sanity-plugin-graphiql",
-  "version": "1.4.2",
+  "version": "1.4.3-0",
   "description": "Add GraphiQL to your Sanity desk",
   "keywords": [
     "sanity",
