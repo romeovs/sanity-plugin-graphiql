@@ -20,7 +20,7 @@ export function GraphiQL(props: GraphiQLProps) {
     <Component fetcher={fetcher} defaultQuery={''}>
       <Component.Footer>
         <div className='graphiql-footer-elapsed'>
-          End-to-end: ${elapsed ? `${elapsed}ms` : 'n/a'}
+          End-to-end: {elapsed ? `${elapsed}ms` : 'n/a'}
         </div>
       </Component.Footer>
     </Component>
