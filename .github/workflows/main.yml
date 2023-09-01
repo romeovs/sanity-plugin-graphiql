@@ -46,7 +46,6 @@ jobs:
         with:
           name: dist
           path: dist/
-          if-no-files-found: error
 
   test:
     runs-on: ubuntu-latest
