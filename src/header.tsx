@@ -1,0 +1,136 @@
+import * as React from 'react'
+
+import {Card, Stack, Box, Label, Grid, Select} from '@sanity/ui'
+
+import {ListGraphQLApisResult} from './use-list-graphql-apis'
+import {parseUrl, buildUrl} from './url'
+
+type HeaderProps = {
+  url: string | null
+  onUrlChange: (url: string) => void
+  apis: ListGraphQLApisResult
+}
+
+type APIInfo = {
+  projectId: string
+  dataset: string
+  tag: string
+}
+
+const defaultVersion = 'v2023-08-01'
+const defaultPerspective = 'raw'
+
+// Convert the selected API to a string that can be set on a <option />
+function toValue(info: APIInfo): string {
+  return `${info.projectId}:${info.dataset}:${info.tag}`
+}
+
+// Parse the value on an <option /> into the related API info
+function fromValue(str: string): APIInfo {
+  const [projectId, dataset, tag] = str.split(':')
+  if (!projectId || !dataset || !tag) {
+    throw new Error('Could not parse value')
+  }
+
+  return {projectId, dataset, tag}
+}
+
+export function Header(props: HeaderProps) {
+  const {url, onUrlChange, apis} = props
+
+  const parsed = parseUrl(url)
+  const {version, perspective} = parsed
+
+  React.useEffect(
+    function () {
+      if (!apis.data?.[0]) {
+        return
+      }
+
+      onUrlChange(
+        buildUrl({
+          ...apis.data[0],
+          version: defaultVersion,
+          perspective: defaultPerspective,
+        }),
+      )
+    },
+    [apis.data],
+  )
+
+  function handleApiChange(evt: React.ChangeEvent<HTMLSelectElement>) {
+    onUrlChange(
+      buildUrl({
+        ...parsed,
+        ...fromValue(evt.target.value),
+      }),
+    )
+  }
+
+  function handleVersionChange(evt: React.ChangeEvent<HTMLSelectElement>) {
+    onUrlChange(
+      buildUrl({
+        ...parsed,
+        version: evt.target.value,
+      }),
+    )
+  }
+
+  function handlePerspectiveChange(evt: React.ChangeEvent<HTMLSelectElement>) {
+    onUrlChange(
+      buildUrl({
+        ...parsed,
+        perspective: evt.target.value,
+      }),
+    )
+  }
+
+  return (
+    <Card padding={3}>
+      <Grid columns={[20, 12, 12]}>
+        <Box padding={1} column={3}>
+          <Stack>
+            <Card paddingTop={1} paddingBottom={2}>
+              <Label>GraphQL API</Label>
+            </Card>
+            <Select value={toValue(parsed)} onChange={handleApiChange} disabled={apis?.loading}>
+              <option disabled>projectId, dataset, tag</option>
+              {apis.data?.map((api: APIInfo) => (
+                <option key={toValue(api)} value={toValue(api)}>
+                  {api.projectId}, {api.dataset}, {api.tag}
+                </option>
+              ))}
+            </Select>
+          </Stack>
+        </Box>
+        <Box padding={1} column={2}>
+          <Stack>
+            <Card paddingTop={1} paddingBottom={2}>
+              <Label>API Version</Label>
+            </Card>
+            <Select value={version} onChange={handleVersionChange} disabled={apis.loading}>
+              <option>v2023-08-01</option>
+              <option>v1</option>
+            </Select>
+          </Stack>
+        </Box>
+        <Box padding={1} column={2}>
+          <Stack>
+            <Card paddingTop={1} paddingBottom={2}>
+              <Label>Perspective</Label>
+            </Card>
+            <Select
+              value={perspective}
+              onChange={handlePerspectiveChange}
+              disabled={apis.loading || version === 'v1'}
+            >
+              <option>raw</option>
+              <option>previewDrafts</option>
+              <option>published</option>
+            </Select>
+          </Stack>
+        </Box>
+      </Grid>
+    </Card>
+  )
+}
