@@ -43,7 +43,7 @@ export function Header(props: HeaderProps) {
 
   React.useEffect(
     function () {
-      if (!apis.data?.[0]) {
+      if (!apis.data?.[0] || url) {
         return
       }
 
@@ -55,7 +55,7 @@ export function Header(props: HeaderProps) {
         }),
       )
     },
-    [apis.data],
+    [url, apis.data],
   )
 
   function handleApiChange(evt: React.ChangeEvent<HTMLSelectElement>) {

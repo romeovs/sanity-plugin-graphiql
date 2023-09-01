@@ -1,12 +1,13 @@
 import * as React from 'react'
 
-import {Tool} from 'sanity'
+import {Tool, useProjectId} from 'sanity'
 
 import 'graphiql/graphiql.css'
 import './custom.css'
 
 import {GraphiQLToolConfig} from './types'
 import {useListGraphQLApis} from './use-list-graphql-apis'
+import {usePersistedState} from './use-persisted-state'
 import {Header} from './header'
 import {ErrorBoundary} from './error-boundary'
 import {ErrorRender, ErrorMessage} from './error'
@@ -14,6 +15,10 @@ import {GraphiQL} from './graphiql'
 
 type GraphiQLToolProps = {
   tool: Tool<GraphiQLToolConfig>
+}
+
+type State = {
+  url: string | null
 }
 
 export default function GraphiQLTool(props: GraphiQLToolProps) {
@@ -28,8 +33,21 @@ function Render(props: GraphiQLToolProps) {
   const options = props.tool.options!
   const {apiVersion} = options
 
+  const projectId = useProjectId()
+  const key = `graphiql_tool__${projectId}`
+
   const apis = useListGraphQLApis(apiVersion)
-  const [url, setUrl] = React.useState<string | null>(options.url ?? null)
+  const [state, setState] = usePersistedState<State>(key, {
+    url: options.url ?? null,
+  })
+
+  const {url} = state
+  function setUrl(url: string) {
+    setState((state) => ({
+      ...state,
+      url,
+    }))
+  }
 
   if (apis.data?.length === 0) {
     return (
