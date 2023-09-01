@@ -46,7 +46,7 @@
     "lint": "eslint .",
     "prepublishOnly": "run-s build",
     "watch": "pkg-utils watch --strict",
-    "test": "true"
+    "test": "vitest run"
   },
   "dependencies": {
     "@graphiql/react": "^0.19.3",
