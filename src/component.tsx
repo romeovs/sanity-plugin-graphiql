@@ -11,6 +11,7 @@ import './custom.css'
 
 import {GraphiQLToolConfig} from './types'
 import {useFetcher} from './use-fetcher'
+import {useTimedFetcher} from './use-timed'
 
 type GraphiQLToolProps = {
   tool: Tool<GraphiQLToolConfig>
@@ -25,7 +26,8 @@ export default function GraphiQLTool(props: GraphiQLToolProps) {
   const perspective = preview ? 'previewDrafts' : 'published'
   const url = `https://${projectId}.api.sanity.io/${version}/graphql/${dataset}/${tag}?perspective=${perspective}`
 
-  const fetcher = useFetcher(url)
+  const _fetcher = useFetcher(url)
+  const [fetcher, elapsed] = useTimedFetcher(_fetcher)
 
   if (!fetcher) {
     return null
@@ -54,6 +56,12 @@ export default function GraphiQLTool(props: GraphiQLToolProps) {
           </ToolbarButton>,
         ],
       }}
-    />
+    >
+      <GraphiQL.Footer>
+        <div className='graphiql-footer-elapsed'>
+          End-to-end: ${elapsed ? `${elapsed}ms` : 'n/a'}
+        </div>
+      </GraphiQL.Footer>
+    </GraphiQL>
   )
 }
