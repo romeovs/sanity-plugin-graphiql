@@ -1,4 +1,4 @@
-import * as React from 'react'
+t import * as React from 'react'
 
 type Setter<T> = React.Dispatch<React.SetStateAction<T | null>>
 
@@ -10,7 +10,6 @@ export function usePersistedState<T>(key: string, initialValue?: T): [T | null, 
 
   React.useEffect(
     function () {
-      console.log('HERE', value)
       write(key, value)
     },
     [value],
