@@ -132,7 +132,6 @@ jobs:
         with:
           name: dist
           path: dist/
-          if-no-files-found: error
       - name: Audit code
         run: pnpm audit signatures
       - name: Authenticate to npm
