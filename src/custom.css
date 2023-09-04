@@ -36,4 +36,8 @@
   flex-direction: column;
   outline: 2px solid red;
   height: 100%;
+
+  [data-ui='Card'] {
+    background-color: hsl(var(--color-base));
+  }
 }

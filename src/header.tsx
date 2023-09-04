@@ -1,9 +1,10 @@
 import * as React from 'react'
 
-import {Card, Stack, Box, Label, Grid, Select} from '@sanity/ui'
+import {Card, Stack, Box, Label, Grid, Select, ThemeProvider} from '@sanity/ui'
 
 import {ListGraphQLApisResult} from './use-list-graphql-apis'
 import {parseUrl, buildUrl} from './url'
+import {useGraphiQLTheme} from './use-graphiql-theme'
 
 type HeaderProps = {
   url: string | null
@@ -58,6 +59,8 @@ export function Header(props: HeaderProps) {
     [url, apis.data],
   )
 
+  const theme = useGraphiQLTheme()
+
   function handleApiChange(evt: React.ChangeEvent<HTMLSelectElement>) {
     onUrlChange(
       buildUrl({
@@ -86,51 +89,53 @@ export function Header(props: HeaderProps) {
   }
 
   return (
-    <Card padding={3}>
-      <Grid columns={[20, 12, 12]}>
-        <Box padding={1} column={3}>
-          <Stack>
-            <Card paddingTop={1} paddingBottom={2}>
-              <Label>GraphQL API</Label>
-            </Card>
-            <Select value={toValue(parsed)} onChange={handleApiChange} disabled={apis?.loading}>
-              <option disabled>projectId, dataset, tag</option>
-              {apis.data?.map((api: APIInfo) => (
-                <option key={toValue(api)} value={toValue(api)}>
-                  {api.projectId}, {api.dataset}, {api.tag}
-                </option>
-              ))}
-            </Select>
-          </Stack>
-        </Box>
-        <Box padding={1} column={2}>
-          <Stack>
-            <Card paddingTop={1} paddingBottom={2}>
-              <Label>API Version</Label>
-            </Card>
-            <Select value={version} onChange={handleVersionChange} disabled={apis.loading}>
-              <option>v2023-08-01</option>
-              <option>v1</option>
-            </Select>
-          </Stack>
-        </Box>
-        <Box padding={1} column={2}>
-          <Stack>
-            <Card paddingTop={1} paddingBottom={2}>
-              <Label>Perspective</Label>
-            </Card>
-            <Select
-              value={perspective}
-              onChange={handlePerspectiveChange}
-              disabled={apis.loading || version === 'v1'}
-            >
-              <option>raw</option>
-              <option>previewDrafts</option>
-              <option>published</option>
-            </Select>
-          </Stack>
-        </Box>
-      </Grid>
-    </Card>
+    <ThemeProvider scheme={theme}>
+      <Card padding={3}>
+        <Grid columns={[20, 12, 12]}>
+          <Box padding={1} column={3}>
+            <Stack>
+              <Card paddingTop={1} paddingBottom={2}>
+                <Label>GraphQL API</Label>
+              </Card>
+              <Select value={toValue(parsed)} onChange={handleApiChange} disabled={apis?.loading}>
+                <option disabled>projectId, dataset, tag</option>
+                {apis.data?.map((api: APIInfo) => (
+                  <option key={toValue(api)} value={toValue(api)}>
+                    {api.projectId}, {api.dataset}, {api.tag}
+                  </option>
+                ))}
+              </Select>
+            </Stack>
+          </Box>
+          <Box padding={1} column={2}>
+            <Stack>
+              <Card paddingTop={1} paddingBottom={2}>
+                <Label>API Version</Label>
+              </Card>
+              <Select value={version} onChange={handleVersionChange} disabled={apis.loading}>
+                <option>v2023-08-01</option>
+                <option>v1</option>
+              </Select>
+            </Stack>
+          </Box>
+          <Box padding={1} column={2}>
+            <Stack>
+              <Card paddingTop={1} paddingBottom={2}>
+                <Label>Perspective</Label>
+              </Card>
+              <Select
+                value={perspective}
+                onChange={handlePerspectiveChange}
+                disabled={apis.loading || version === 'v1'}
+              >
+                <option>raw</option>
+                <option>previewDrafts</option>
+                <option>published</option>
+              </Select>
+            </Stack>
+          </Box>
+        </Grid>
+      </Card>
+    </ThemeProvider>
   )
 }

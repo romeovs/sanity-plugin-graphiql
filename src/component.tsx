@@ -56,7 +56,7 @@ function Render(props: GraphiQLToolProps) {
   }
 
   return (
-    <div className='graphiql-tool-wrapper'>
+    <div className='graphiql-tool-wrapper graphiql-container'>
       {options.url ? null : <Header url={url} onUrlChange={setUrl} apis={apis} />}
       <GraphiQL url={url} />
     </div>
