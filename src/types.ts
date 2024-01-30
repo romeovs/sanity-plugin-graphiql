@@ -6,4 +6,5 @@ export type GraphiQLToolConfig = {
   name?: string
   title?: string
   icon?: React.ComponentType
+  defaultQuery?: string
 }

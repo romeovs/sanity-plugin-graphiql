@@ -5,6 +5,7 @@ import {useTimedFetcher} from './use-timed'
 
 type GraphiQLProps = {
   url: string | null
+  defaultQuery?: string
 }
 
 export function GraphiQL(props: GraphiQLProps) {

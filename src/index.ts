@@ -29,6 +29,9 @@ const GraphiQLTool = lazy(() => import('./component'))
  *
  *      // override the default tool icon
  *      icon: BlockElementIcon,
+ *
+ *      // set the default query
+ *      defaultQuery: 'query { ... }'
  *    }),
  *  ],
  * })
