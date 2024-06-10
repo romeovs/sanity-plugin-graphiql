@@ -15,7 +15,13 @@ Add GraphiQL to your Sanity Studio.
 
 ```sh
 npm install sanity-plugin-graphiql
+```
+
+```sh
 pnpm install sanity-plugin-graphiql
+```
+
+```sh
 yarn add sanity-plugin-graphiql
 ```
 
