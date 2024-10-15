@@ -18,6 +18,14 @@
   }
 }
 
+.graphiql-container {
+  --color-base: var(--card-bg-color) !important;
+}
+
+.graphiql-editors {
+  background-color: var(--card-bg-color) !important;
+}
+
 .custom-icon {
   height: 2rem;
   width: 2rem;
