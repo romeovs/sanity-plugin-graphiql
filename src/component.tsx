@@ -1,4 +1,5 @@
 import {Tool, useProjectId} from 'sanity'
+import {useCallback} from 'react'
 
 import 'graphiql/graphiql.css'
 import './custom.css'
@@ -45,12 +46,12 @@ function Render(props: GraphiQLToolProps) {
   })
   const storage = useNamespacedStorage<State>(state, setState)
 
-  function setUrl(url: string) {
+  const setUrl = useCallback(function (url: string) {
     setState((state) => ({
       ...state,
       url,
     }))
-  }
+  }, [])
 
   if (apis.data?.length === 0) {
     return (
