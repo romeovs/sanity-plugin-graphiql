@@ -90,14 +90,17 @@ export function Header(props: HeaderProps) {
 
   return (
     <ThemeProvider scheme={theme}>
-      <Card padding={3}>
+      <Card padding={3} borderBottom>
         <Grid columns={[20, 12, 12]}>
           <Box padding={1} column={3}>
-            <Stack>
-              <Card paddingTop={1} paddingBottom={2}>
-                <Label>GraphQL API</Label>
-              </Card>
-              <Select value={toValue(parsed)} onChange={handleApiChange} disabled={apis?.loading}>
+            <Stack space={2}>
+              <Label size={1}>GraphQL API</Label>
+              <Select
+                size={1}
+                value={toValue(parsed)}
+                onChange={handleApiChange}
+                disabled={apis?.loading}
+              >
                 <option disabled>projectId, dataset, tag</option>
                 {apis.data?.map((api: APIInfo) => (
                   <option key={toValue(api)} value={toValue(api)}>
@@ -108,22 +111,24 @@ export function Header(props: HeaderProps) {
             </Stack>
           </Box>
           <Box padding={1} column={2}>
-            <Stack>
-              <Card paddingTop={1} paddingBottom={2}>
-                <Label>API Version</Label>
-              </Card>
-              <Select value={version} onChange={handleVersionChange} disabled={apis.loading}>
+            <Stack space={2}>
+              <Label size={1}>API Version</Label>
+              <Select
+                size={1}
+                value={version}
+                onChange={handleVersionChange}
+                disabled={apis.loading}
+              >
                 <option>v2023-08-01</option>
                 <option>v1</option>
               </Select>
             </Stack>
           </Box>
           <Box padding={1} column={2}>
-            <Stack>
-              <Card paddingTop={1} paddingBottom={2}>
-                <Label>Perspective</Label>
-              </Card>
+            <Stack space={2}>
+              <Label size={1}>Perspective C</Label>
               <Select
+                size={1}
                 value={perspective}
                 onChange={handlePerspectiveChange}
                 disabled={apis.loading || version === 'v1'}
