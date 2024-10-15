@@ -1,4 +1,4 @@
-import {GraphiQL as Component} from 'graphiql'
+import {GraphiQL as Component, GraphiQLProps as ComponentProps} from 'graphiql'
 
 import {useFetcher} from './use-fetcher'
 import {useTimedFetcher} from './use-timed'
@@ -6,10 +6,11 @@ import {useTimedFetcher} from './use-timed'
 type GraphiQLProps = {
   url: string | null
   defaultQuery?: string
+  storage: ComponentProps['storage']
 }
 
 export function GraphiQL(props: GraphiQLProps) {
-  const {url} = props
+  const {url, storage} = props
   const _fetcher = useFetcher(url)
   const [fetcher, elapsed] = useTimedFetcher(_fetcher)
 
@@ -18,7 +19,7 @@ export function GraphiQL(props: GraphiQLProps) {
   }
 
   return (
-    <Component fetcher={fetcher} defaultQuery={''}>
+    <Component fetcher={fetcher} defaultQuery={''} storage={storage}>
       <Component.Footer>
         <div className='graphiql-footer-elapsed'>
           End-to-end: {elapsed ? `${elapsed}ms` : 'n/a'}

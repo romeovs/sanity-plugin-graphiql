@@ -10,6 +10,7 @@ import {Header} from './header'
 import {ErrorBoundary} from './error-boundary'
 import {ErrorRender, ErrorMessage} from './error'
 import {GraphiQL} from './graphiql'
+import {useNamespacedStorage} from './use-namespaced-storage'
 
 type GraphiQLToolProps = {
   tool: Tool<GraphiQLToolConfig>
@@ -32,12 +33,14 @@ function Render(props: GraphiQLToolProps) {
   const {apiVersion} = options
 
   const projectId = useProjectId()
-  const key = `graphiql_tool__${projectId}`
+  const namespace = `graphiql_tool__${projectId}`
+  const key = `${namespace}__state`
 
   const apis = useListGraphQLApis(apiVersion)
   const [state, setState] = usePersistedState<State>(key, {
     url: options.url ?? null,
   })
+  const storage = useNamespacedStorage(namespace)
 
   const {url} = state
   function setUrl(url: string) {
@@ -57,7 +60,7 @@ function Render(props: GraphiQLToolProps) {
     <div className='graphiql-tool-wrapper'>
       {options.url ? null : <Header url={url} onUrlChange={setUrl} apis={apis} />}
       <div className='graphiql-container'>
-        <GraphiQL url={url} defaultQuery={options.defaultQuery} />
+        <GraphiQL url={url} defaultQuery={options.defaultQuery} storage={storage} />
       </div>
     </div>
   )
