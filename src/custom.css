@@ -20,6 +20,11 @@
 
 .graphiql-container {
   --color-base: var(--card-bg-color) !important;
+  --border-radius-12: 4px !important;
+}
+
+.graphiql-sessions {
+  border-radius: var(--border-radius-12) !important;
 }
 
 .graphiql-editors {
@@ -44,8 +49,4 @@
   flex-direction: column;
   outline: 2px solid red;
   height: 100%;
-
-  [data-ui='Card'] {
-    background-color: hsl(var(--color-base));
-  }
 }
