@@ -32,6 +32,10 @@
   background-color: var(--card-bg-color) !important;
 }
 
+.graphiql-logo {
+  display: none;
+}
+
 .custom-icon {
   height: 2rem;
   width: 2rem;
