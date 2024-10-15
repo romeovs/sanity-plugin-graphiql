@@ -21,6 +21,7 @@
 .graphiql-container {
   --color-base: var(--card-bg-color) !important;
   --border-radius-12: 4px !important;
+  font-size: 13px;
 }
 
 .graphiql-sessions {
