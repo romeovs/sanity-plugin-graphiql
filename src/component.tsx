@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import {Tool, useProjectId} from 'sanity'
 
 import 'graphiql/graphiql.css'
