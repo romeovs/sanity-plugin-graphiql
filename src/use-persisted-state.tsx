@@ -1,12 +1,10 @@
 import * as React from 'react'
 
-type Setter<T> = React.Dispatch<React.SetStateAction<T | null>>
+type Setter<T> = React.Dispatch<React.SetStateAction<T>>
 
-export function usePersistedState<T>(key: string): [T | null, Setter<T>]
-export function usePersistedState<T>(key: string, initialValue: T): [T, Setter<T>]
-export function usePersistedState<T>(key: string, initialValue?: T): [T | null, Setter<T>] {
-  const init = read<T>(key) ?? initialValue ?? null
-  const [value, setValue] = React.useState<T | null>(init)
+export function usePersistedState<T>(key: string, initialValue: T): [T, Setter<T>] {
+  const init = read<T>(key) ?? initialValue
+  const [value, setValue] = React.useState<T>(init)
 
   React.useEffect(
     function () {

@@ -1,45 +1,56 @@
 import {useMemo} from 'react'
+import type {GraphiQLProps} from 'graphiql'
+import * as React from 'react'
 
-export function useNamespacedStorage(namespace: string) {
+export type Storage = GraphiQLProps['storage']
+
+type State = {
+  store?: {
+    [key: string]: string | null
+  } | null
+}
+
+type Setter<T extends State> = React.Dispatch<React.SetStateAction<T>>
+
+export function useNamespacedStorage<T extends State>(
+  state: T | null,
+  setState: Setter<T>,
+): Storage {
   return useMemo(
     function () {
-      const prefix = `${namespace}__`
-      function prefixed(key: string) {
-        return `${prefix}${key}`
-      }
-
-      function* keys() {
-        for (const key in Object.keys(localStorage)) {
-          if (key.startsWith(prefix)) {
-            yield key
-          }
-        }
-      }
-
       return {
         setItem(key: string, value: string) {
-          localStorage.setItem(prefixed(key), value)
+          setState((state) => ({
+            ...state,
+            store: {
+              ...state?.store,
+              [key]: value,
+            },
+          }))
         },
         getItem(key: string) {
-          return localStorage.getItem(prefixed(key))
+          return state?.store?.[key] ?? null
         },
         removeItem(key: string) {
-          return localStorage.removeItem(prefixed(key))
+          setState((state) => ({
+            ...state,
+            store: {
+              ...state.store,
+              [key]: null,
+            },
+          }))
         },
         clear() {
-          for (const key of keys()) {
-            localStorage.removeItem(key)
-          }
+          setState((state) => ({
+            ...state,
+            store: {},
+          }))
         },
         get length() {
-          let count = 0
-          for (const _ of keys()) {
-            count += 1
-          }
-          return count
+          return Object.keys(state?.store ?? {}).length
         },
       }
     },
-    [namespace],
+    [state, setState],
   )
 }

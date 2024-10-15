@@ -1,12 +1,13 @@
-import {GraphiQL as Component, GraphiQLProps as ComponentProps} from 'graphiql'
+import {GraphiQL as Component} from 'graphiql'
 
 import {useFetcher} from './use-fetcher'
 import {useTimedFetcher} from './use-timed'
+import type {Storage} from './use-namespaced-storage'
 
 type GraphiQLProps = {
   url: string | null
   defaultQuery?: string
-  storage: ComponentProps['storage']
+  storage: Storage
 }
 
 export function GraphiQL(props: GraphiQLProps) {

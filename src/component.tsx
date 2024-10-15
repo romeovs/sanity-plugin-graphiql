@@ -18,6 +18,9 @@ type GraphiQLToolProps = {
 
 type State = {
   url: string | null
+  store: {
+    [key: string]: string | null
+  }
 }
 
 export default function GraphiQLTool(props: GraphiQLToolProps) {
@@ -33,16 +36,15 @@ function Render(props: GraphiQLToolProps) {
   const {apiVersion} = options
 
   const projectId = useProjectId()
-  const namespace = `graphiql_tool__${projectId}`
-  const key = `${namespace}__state`
+  const key = `graphiql_tool__${projectId}`
 
   const apis = useListGraphQLApis(apiVersion)
   const [state, setState] = usePersistedState<State>(key, {
     url: options.url ?? null,
+    store: {},
   })
-  const storage = useNamespacedStorage(namespace)
+  const storage = useNamespacedStorage<State>(state, setState)
 
-  const {url} = state
   function setUrl(url: string) {
     setState((state) => ({
       ...state,
@@ -58,9 +60,9 @@ function Render(props: GraphiQLToolProps) {
 
   return (
     <div className='graphiql-tool-wrapper'>
-      {options.url ? null : <Header url={url} onUrlChange={setUrl} apis={apis} />}
+      {options.url ? null : <Header url={state.url} onUrlChange={setUrl} apis={apis} />}
       <div className='graphiql-container'>
-        <GraphiQL url={url} defaultQuery={options.defaultQuery} storage={storage} />
+        <GraphiQL url={state.url} defaultQuery={options.defaultQuery} storage={storage} />
       </div>
     </div>
   )
