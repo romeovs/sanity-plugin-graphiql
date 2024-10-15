@@ -4,7 +4,6 @@ import {Card, Stack, Box, Label, Grid, Select} from '@sanity/ui'
 
 import {ListGraphQLApisResult} from './use-list-graphql-apis'
 import {parseUrl, buildUrl} from './url'
-import {useGraphiQLTheme} from './use-graphiql-theme'
 
 type HeaderProps = {
   url: string | null
@@ -58,8 +57,6 @@ export function Header(props: HeaderProps) {
     },
     [url, apis.data],
   )
-
-  const theme = useGraphiQLTheme()
 
   function handleApiChange(evt: React.ChangeEvent<HTMLSelectElement>) {
     onUrlChange(
