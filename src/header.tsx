@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {Card, Stack, Box, Label, Grid, Select, ThemeProvider} from '@sanity/ui'
+import {Card, Stack, Box, Label, Grid, Select} from '@sanity/ui'
 
 import {ListGraphQLApisResult} from './use-list-graphql-apis'
 import {parseUrl, buildUrl} from './url'
@@ -89,58 +89,51 @@ export function Header(props: HeaderProps) {
   }
 
   return (
-    <ThemeProvider scheme={theme}>
-      <Card padding={3} borderBottom>
-        <Grid columns={[20, 12, 12]}>
-          <Box padding={1} column={3}>
-            <Stack space={2}>
-              <Label size={1}>GraphQL API</Label>
-              <Select
-                size={1}
-                value={toValue(parsed)}
-                onChange={handleApiChange}
-                disabled={apis?.loading}
-              >
-                <option disabled>projectId, dataset, tag</option>
-                {apis.data?.map((api: APIInfo) => (
-                  <option key={toValue(api)} value={toValue(api)}>
-                    {api.projectId}, {api.dataset}, {api.tag}
-                  </option>
-                ))}
-              </Select>
-            </Stack>
-          </Box>
-          <Box padding={1} column={2}>
-            <Stack space={2}>
-              <Label size={1}>API Version</Label>
-              <Select
-                size={1}
-                value={version}
-                onChange={handleVersionChange}
-                disabled={apis.loading}
-              >
-                <option>v2023-08-01</option>
-                <option>v1</option>
-              </Select>
-            </Stack>
-          </Box>
-          <Box padding={1} column={2}>
-            <Stack space={2}>
-              <Label size={1}>Perspective C</Label>
-              <Select
-                size={1}
-                value={perspective}
-                onChange={handlePerspectiveChange}
-                disabled={apis.loading || version === 'v1'}
-              >
-                <option>raw</option>
-                <option>previewDrafts</option>
-                <option>published</option>
-              </Select>
-            </Stack>
-          </Box>
-        </Grid>
-      </Card>
-    </ThemeProvider>
+    <Card padding={3} borderBottom>
+      <Grid columns={[20, 12, 12]}>
+        <Box padding={1} column={3}>
+          <Stack space={2}>
+            <Label size={1}>GraphQL API</Label>
+            <Select
+              size={1}
+              value={toValue(parsed)}
+              onChange={handleApiChange}
+              disabled={apis?.loading}
+            >
+              <option disabled>projectId, dataset, tag</option>
+              {apis.data?.map((api: APIInfo) => (
+                <option key={toValue(api)} value={toValue(api)}>
+                  {api.projectId}, {api.dataset}, {api.tag}
+                </option>
+              ))}
+            </Select>
+          </Stack>
+        </Box>
+        <Box padding={1} column={2}>
+          <Stack space={2}>
+            <Label size={1}>API Version</Label>
+            <Select size={1} value={version} onChange={handleVersionChange} disabled={apis.loading}>
+              <option>v2023-08-01</option>
+              <option>v1</option>
+            </Select>
+          </Stack>
+        </Box>
+        <Box padding={1} column={2}>
+          <Stack space={2}>
+            <Label size={1}>Perspective</Label>
+            <Select
+              size={1}
+              value={perspective}
+              onChange={handlePerspectiveChange}
+              disabled={apis.loading || version === 'v1'}
+            >
+              <option>raw</option>
+              <option>previewDrafts</option>
+              <option>published</option>
+            </Select>
+          </Stack>
+        </Box>
+      </Grid>
+    </Card>
   )
 }
